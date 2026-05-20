@@ -217,21 +217,23 @@ function SectionHeader({
   intro?: string;
 }) {
   return (
-    <div className="max-w-3xl">
-      <Reveal>
-        <div className="inline-flex items-center gap-2 text-[11px] uppercase tracking-[0.18em] text-bronze">
-          <span className="h-px w-8 bg-bronze/60" />
-          {eyebrow}
-        </div>
-      </Reveal>
-      <Reveal delay={80}>
-        <h2 className="mt-5 font-serif text-4xl sm:text-5xl lg:text-[56px] tracking-[-0.02em] leading-[1.04]">
-          {title}
-        </h2>
-      </Reveal>
+    <div className={intro ? "grid lg:grid-cols-12 gap-10 lg:gap-16 items-end" : ""}>
+      <div className={intro ? "lg:col-span-7" : "max-w-3xl"}>
+        <Reveal>
+          <div className="inline-flex items-center gap-2 text-[11px] uppercase tracking-[0.18em] text-bronze">
+            <span className="h-px w-8 bg-bronze/60" />
+            {eyebrow}
+          </div>
+        </Reveal>
+        <Reveal delay={80}>
+          <h2 className="mt-5 font-serif text-4xl sm:text-5xl lg:text-[56px] tracking-[-0.02em] leading-[1.04]">
+            {title}
+          </h2>
+        </Reveal>
+      </div>
       {intro && (
-        <Reveal delay={140}>
-          <p className="mt-6 text-[17px] text-muted-foreground leading-relaxed max-w-2xl">
+        <Reveal delay={140} className="lg:col-span-5">
+          <p className="text-[17px] text-muted-foreground leading-relaxed">
             {intro}
           </p>
         </Reveal>
