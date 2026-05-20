@@ -255,7 +255,7 @@ function About() {
       d: "Office, retail, industrial, warehousing, data centres and land — one trusted desk.",
     },
     {
-      k: "FOUNDER",
+      k: "IG",
       t: "Institutional Execution",
       d: "Process-led, documentation-rigorous, and aligned to global occupier standards.",
     },
