@@ -399,11 +399,11 @@ function MapVisual() {
           strokeWidth="1"
         />
         {[
-          { x: 230, y: 180, l: "Bhopal" },
-          { x: 170, y: 200, l: "Indore" },
-          { x: 360, y: 230, l: "Jabalpur" },
-          { x: 280, y: 110, l: "Gwalior" },
-          { x: 200, y: 165, l: "Ujjain" },
+          { x: 290, y: 115, l: "Gwalior" },
+          { x: 265, y: 200, l: "Bhopal" },
+          { x: 175, y: 235, l: "Indore" },
+          { x: 160, y: 180, l: "Ujjain" },
+          { x: 415, y: 220, l: "Jabalpur" },
         ].map((p) => (
           <g key={p.l}>
             <circle cx={p.x} cy={p.y} r="4" fill="oklch(0.52 0.09 45)" />
