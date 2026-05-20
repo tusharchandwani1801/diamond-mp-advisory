@@ -501,7 +501,7 @@ function Services() {
                       s.featured ? "border-background/30 text-gold" : "border-border text-bronze"
                     }`}
                   >
-                    <s.icon className="h-4.5 w-4.5" strokeWidth={1.5} />
+                    <s.icon className="h-[18px] w-[18px]" strokeWidth={1.5} />
                   </div>
                   <h3 className="mt-8 font-serif text-2xl tracking-tight">{s.t}</h3>
                   <p
