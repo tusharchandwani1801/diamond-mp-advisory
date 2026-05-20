@@ -723,7 +723,7 @@ function CTA() {
             <div className="mt-12 space-y-5">
               <div>
                 <div className="text-[11px] uppercase tracking-[0.18em] text-background/50">
-                  Principal
+                  ​FOUNDER
                 </div>
                 <div className="mt-2 font-serif text-2xl">Tusshar D Chandwani</div>
               </div>
