@@ -72,14 +72,14 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "Lovable App" },
-      { name: "description", content: "Lovable Generated Project" },
-      { name: "author", content: "Lovable" },
-      { property: "og:title", content: "Lovable App" },
-      { property: "og:description", content: "Lovable Generated Project" },
+      { title: "Diamond Realty — Commercial Real Estate Advisory in Madhya Pradesh" },
+      { name: "description", content: "Boutique commercial real estate and development advisory across Madhya Pradesh. Land, leasing, logistics, data centres, and strategic expansion." },
+      { name: "author", content: "Diamond Realty" },
+      { property: "og:title", content: "Diamond Realty — Commercial Real Estate Advisory" },
+      { property: "og:description", content: "Connecting ambition to the right space. CRE advisory across Madhya Pradesh." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary" },
-      { name: "twitter:site", content: "@Lovable" },
+      { name: "twitter:site", content: "@DiamondRealty" },
     ],
     links: [
       {
