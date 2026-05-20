@@ -6,7 +6,7 @@ import {
   ShoppingBag,
   Server,
   Warehouse,
-  Map,
+  Map as MapIcon,
   FileSearch,
   Cpu,
   Landmark,
@@ -85,10 +85,10 @@ function Nav() {
             scrolled ? "glass-nav border border-border/60 shadow-[0_8px_30px_-12px_rgba(0,0,0,0.08)]" : ""
           }`}
         >
-          <a href="#top" className="flex items-center gap-2.5">
-            <img src={logo} alt="Diamond Realty" className="h-9 w-9 object-contain" />
-            <span className="text-[15px] tracking-tight font-medium">
-              Diamond <span className="text-bronze">Realty</span>
+          <a href="#top" className="flex items-center gap-3">
+            <img src={logo} alt="Diamond Realty" className="h-11 w-11 object-contain" />
+            <span className="font-serif text-[20px] tracking-tight leading-none">
+              Diamond <span className="text-bronze italic">Realty</span>
             </span>
           </a>
           <nav className="hidden md:flex items-center gap-8 text-[13px] text-muted-foreground">
@@ -112,13 +112,13 @@ function Nav() {
 
 function Hero() {
   return (
-    <section id="top" className="relative pt-36 sm:pt-44 pb-20 lg:pb-32 overflow-hidden">
+    <section id="top" className="relative pt-32 sm:pt-40 pb-16 lg:pb-24 overflow-hidden">
       <div className="mx-auto max-w-7xl px-6 grid lg:grid-cols-12 gap-12 lg:gap-8 items-center">
         <div className="lg:col-span-7">
           <Reveal>
             <div className="inline-flex items-center gap-2 text-[11px] uppercase tracking-[0.18em] text-bronze">
               <span className="h-px w-8 bg-bronze/60" />
-              Commercial Real Estate Advisory
+              Commercial Real Estate &amp; Development Advisory
             </div>
           </Reveal>
           <Reveal delay={80}>
@@ -172,7 +172,7 @@ function Hero() {
               <div className="col-span-2 row-span-3 overflow-hidden rounded-2xl border border-border">
                 <img
                   src={facade}
-                  alt="Architectural facade"
+                  alt="Modern data centre exterior"
                   className="h-full w-full object-cover"
                   loading="lazy"
                   width={900}
