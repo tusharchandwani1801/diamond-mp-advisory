@@ -453,7 +453,7 @@ function Services() {
       d: "Grade-A warehousing, cold chain, multi-modal hubs along DMIC and emerging logistics corridors.",
     },
     {
-      icon: Map,
+      icon: MapIcon,
       t: "Land Parcels",
       d: "Industrial, institutional, and mixed-use parcels with title diligence and development feasibility.",
     },
