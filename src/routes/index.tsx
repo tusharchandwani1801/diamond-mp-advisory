@@ -6,7 +6,7 @@ import {
   ShoppingBag,
   Server,
   Warehouse,
-  Map,
+  Map as MapIcon,
   FileSearch,
   Cpu,
   Landmark,
@@ -85,10 +85,10 @@ function Nav() {
             scrolled ? "glass-nav border border-border/60 shadow-[0_8px_30px_-12px_rgba(0,0,0,0.08)]" : ""
           }`}
         >
-          <a href="#top" className="flex items-center gap-2.5">
-            <img src={logo} alt="Diamond Realty" className="h-9 w-9 object-contain" />
-            <span className="text-[15px] tracking-tight font-medium">
-              Diamond <span className="text-bronze">Realty</span>
+          <a href="#top" className="flex items-center gap-3">
+            <img src={logo} alt="Diamond Realty" className="h-11 w-11 object-contain" />
+            <span className="font-serif text-[20px] tracking-tight leading-none">
+              Diamond <span className="text-bronze italic">Realty</span>
             </span>
           </a>
           <nav className="hidden md:flex items-center gap-8 text-[13px] text-muted-foreground">
@@ -112,13 +112,13 @@ function Nav() {
 
 function Hero() {
   return (
-    <section id="top" className="relative pt-36 sm:pt-44 pb-20 lg:pb-32 overflow-hidden">
+    <section id="top" className="relative pt-32 sm:pt-40 pb-16 lg:pb-24 overflow-hidden">
       <div className="mx-auto max-w-7xl px-6 grid lg:grid-cols-12 gap-12 lg:gap-8 items-center">
         <div className="lg:col-span-7">
           <Reveal>
             <div className="inline-flex items-center gap-2 text-[11px] uppercase tracking-[0.18em] text-bronze">
               <span className="h-px w-8 bg-bronze/60" />
-              Commercial Real Estate Advisory
+              Commercial Real Estate &amp; Development Advisory
             </div>
           </Reveal>
           <Reveal delay={80}>
@@ -172,7 +172,7 @@ function Hero() {
               <div className="col-span-2 row-span-3 overflow-hidden rounded-2xl border border-border">
                 <img
                   src={facade}
-                  alt="Architectural facade"
+                  alt="Modern data centre exterior"
                   className="h-full w-full object-cover"
                   loading="lazy"
                   width={900}
@@ -217,21 +217,23 @@ function SectionHeader({
   intro?: string;
 }) {
   return (
-    <div className="max-w-3xl">
-      <Reveal>
-        <div className="inline-flex items-center gap-2 text-[11px] uppercase tracking-[0.18em] text-bronze">
-          <span className="h-px w-8 bg-bronze/60" />
-          {eyebrow}
-        </div>
-      </Reveal>
-      <Reveal delay={80}>
-        <h2 className="mt-5 font-serif text-4xl sm:text-5xl lg:text-[56px] tracking-[-0.02em] leading-[1.04]">
-          {title}
-        </h2>
-      </Reveal>
+    <div className={intro ? "grid lg:grid-cols-12 gap-10 lg:gap-16 items-end" : ""}>
+      <div className={intro ? "lg:col-span-7" : "max-w-3xl"}>
+        <Reveal>
+          <div className="inline-flex items-center gap-2 text-[11px] uppercase tracking-[0.18em] text-bronze">
+            <span className="h-px w-8 bg-bronze/60" />
+            {eyebrow}
+          </div>
+        </Reveal>
+        <Reveal delay={80}>
+          <h2 className="mt-5 font-serif text-4xl sm:text-5xl lg:text-[56px] tracking-[-0.02em] leading-[1.04]">
+            {title}
+          </h2>
+        </Reveal>
+      </div>
       {intro && (
-        <Reveal delay={140}>
-          <p className="mt-6 text-[17px] text-muted-foreground leading-relaxed max-w-2xl">
+        <Reveal delay={140} className="lg:col-span-5">
+          <p className="text-[17px] text-muted-foreground leading-relaxed">
             {intro}
           </p>
         </Reveal>
@@ -259,7 +261,7 @@ function About() {
     },
   ];
   return (
-    <section id="about" className="py-24 lg:py-36 border-t border-border">
+    <section id="about" className="py-16 lg:py-24 border-t border-border">
       <div className="mx-auto max-w-7xl px-6">
         <SectionHeader
           eyebrow="About"
@@ -272,7 +274,7 @@ function About() {
           }
           intro="Diamond Realty is a specialist corporate real estate advisory firm headquartered in Madhya Pradesh — built exclusively to serve the leasing, acquisition, and expansion needs of businesses entering or growing within the state."
         />
-        <div className="mt-16 grid md:grid-cols-3 gap-px bg-border rounded-2xl overflow-hidden border border-border">
+        <div className="mt-12 grid md:grid-cols-3 gap-px bg-border rounded-2xl overflow-hidden border border-border">
           {stats.map((s, i) => (
             <Reveal key={s.t} delay={i * 80}>
               <div className="bg-background p-8 lg:p-10 h-full">
@@ -297,7 +299,7 @@ function WhyMP() {
   ];
   const cities = ["Bhopal", "Indore", "Jabalpur", "Gwalior", "Ujjain"];
   return (
-    <section id="mp" className="py-24 lg:py-36 border-t border-border bg-muted/40">
+    <section id="mp" className="py-16 lg:py-24 border-t border-border bg-muted/40">
       <div className="mx-auto max-w-7xl px-6">
         <SectionHeader
           eyebrow="Why Madhya Pradesh"
@@ -311,7 +313,7 @@ function WhyMP() {
           intro="A macro story built on geography, policy, and infrastructure. MP sits at the logistical heart of India — connecting western ports to eastern industrial corridors."
         />
 
-        <div className="mt-16 grid md:grid-cols-4 gap-px bg-border rounded-2xl overflow-hidden border border-border">
+        <div className="mt-12 grid md:grid-cols-4 gap-px bg-border rounded-2xl overflow-hidden border border-border">
           {macros.map((m, i) => (
             <Reveal key={m.l} delay={i * 70}>
               <div className="bg-background p-8 h-full">
@@ -326,14 +328,14 @@ function WhyMP() {
           ))}
         </div>
 
-        <div className="mt-16 grid lg:grid-cols-12 gap-10 items-center">
+        <div className="mt-12 grid lg:grid-cols-12 gap-10 items-center">
           <Reveal className="lg:col-span-7">
             <div className="rounded-2xl border border-border bg-background p-8 lg:p-12">
               <div className="text-[11px] uppercase tracking-[0.18em] text-bronze">
                 Geographic footprint
               </div>
               <h3 className="mt-3 font-serif text-2xl tracking-tight">
-                Five strategic urban anchors
+                Top five urban anchors across MP
               </h3>
               <div className="mt-8 flex flex-wrap gap-2.5">
                 {cities.map((c) => (
@@ -397,11 +399,11 @@ function MapVisual() {
           strokeWidth="1"
         />
         {[
-          { x: 230, y: 180, l: "Bhopal" },
-          { x: 170, y: 200, l: "Indore" },
-          { x: 360, y: 230, l: "Jabalpur" },
-          { x: 280, y: 110, l: "Gwalior" },
-          { x: 200, y: 165, l: "Ujjain" },
+          { x: 290, y: 115, l: "Gwalior" },
+          { x: 265, y: 200, l: "Bhopal" },
+          { x: 175, y: 235, l: "Indore" },
+          { x: 160, y: 180, l: "Ujjain" },
+          { x: 415, y: 220, l: "Jabalpur" },
         ].map((p) => (
           <g key={p.l}>
             <circle cx={p.x} cy={p.y} r="4" fill="oklch(0.52 0.09 45)" />
@@ -453,7 +455,7 @@ function Services() {
       d: "Grade-A warehousing, cold chain, multi-modal hubs along DMIC and emerging logistics corridors.",
     },
     {
-      icon: Map,
+      icon: MapIcon,
       t: "Land Parcels",
       d: "Industrial, institutional, and mixed-use parcels with title diligence and development feasibility.",
     },
@@ -464,7 +466,7 @@ function Services() {
     },
   ];
   return (
-    <section id="services" className="py-24 lg:py-36 border-t border-border">
+    <section id="services" className="py-16 lg:py-24 border-t border-border">
       <div className="mx-auto max-w-7xl px-6">
         <SectionHeader
           eyebrow="Services"
@@ -476,46 +478,19 @@ function Services() {
             </>
           }
         />
-        <div className="mt-16 grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
+        <div className="mt-12 grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
           {items.map((s, i) => (
             <Reveal key={s.t} delay={i * 60}>
-              <div
-                className={`group relative h-full rounded-2xl border border-border p-8 transition-all duration-500 hover:border-bronze hover:-translate-y-1 hover:shadow-[0_24px_60px_-30px_rgba(120,70,30,0.35)] ${
-                  s.featured ? "bg-foreground text-background" : "bg-background"
-                }`}
-              >
-                {s.featured && (
-                  <div
-                    className="absolute inset-0 rounded-2xl opacity-40 pointer-events-none"
-                    style={{
-                      backgroundImage: `url(${datacentre})`,
-                      backgroundSize: "cover",
-                      backgroundPosition: "center",
-                      mixBlendMode: "overlay",
-                    }}
-                  />
-                )}
+              <div className="group relative h-full rounded-2xl border border-border p-8 bg-background transition-all duration-500 hover:border-bronze hover:-translate-y-1 hover:shadow-[0_24px_60px_-30px_rgba(120,70,30,0.35)]">
                 <div className="relative">
-                  <div
-                    className={`h-10 w-10 rounded-full flex items-center justify-center border ${
-                      s.featured ? "border-background/30 text-gold" : "border-border text-bronze"
-                    }`}
-                  >
+                  <div className="h-10 w-10 rounded-full flex items-center justify-center border border-border text-bronze">
                     <s.icon className="h-[18px] w-[18px]" strokeWidth={1.5} />
                   </div>
                   <h3 className="mt-8 font-serif text-2xl tracking-tight">{s.t}</h3>
-                  <p
-                    className={`mt-3 text-[14px] leading-relaxed ${
-                      s.featured ? "text-background/70" : "text-muted-foreground"
-                    }`}
-                  >
+                  <p className="mt-3 text-[14px] leading-relaxed text-muted-foreground">
                     {s.d}
                   </p>
-                  <div
-                    className={`mt-8 inline-flex items-center gap-1.5 text-[12px] uppercase tracking-[0.16em] ${
-                      s.featured ? "text-gold" : "text-bronze"
-                    }`}
-                  >
+                  <div className="mt-8 inline-flex items-center gap-1.5 text-[12px] uppercase tracking-[0.16em] text-bronze">
                     Learn more <ArrowUpRight className="h-3.5 w-3.5" />
                   </div>
                 </div>
@@ -536,7 +511,7 @@ function Insights() {
     { t: "Retail Expansion Corridors", tag: "Consumer" },
   ];
   return (
-    <section id="insights" className="py-24 lg:py-36 border-t border-border bg-muted/40">
+    <section id="insights" className="py-16 lg:py-24 border-t border-border bg-muted/40">
       <div className="mx-auto max-w-7xl px-6">
         <div className="grid lg:grid-cols-12 gap-12 items-end">
           <div className="lg:col-span-7">
@@ -566,7 +541,7 @@ function Insights() {
           </Reveal>
         </div>
 
-        <div className="mt-16 grid sm:grid-cols-2 gap-4">
+        <div className="mt-12 grid sm:grid-cols-2 gap-4">
           {reports.map((r, i) => (
             <Reveal key={r.t} delay={i * 80}>
               <div className="group flex items-center justify-between rounded-2xl border border-border bg-background p-7 hover:border-bronze transition-colors">
@@ -601,7 +576,7 @@ function Process() {
     { n: "06", t: "Post-Lease Support", d: "Fit-out coordination, compliance, and ongoing partnership." },
   ];
   return (
-    <section id="process" className="py-24 lg:py-36 border-t border-border">
+    <section id="process" className="py-16 lg:py-24 border-t border-border">
       <div className="mx-auto max-w-7xl px-6">
         <SectionHeader
           eyebrow="Process"
@@ -613,7 +588,7 @@ function Process() {
             </>
           }
         />
-        <div className="mt-16 relative">
+        <div className="mt-12 relative">
           <div className="absolute left-0 right-0 top-[34px] h-px bg-border hidden lg:block" />
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-6 gap-8 lg:gap-4">
             {steps.map((s, i) => (
@@ -645,7 +620,7 @@ function WhyUs() {
     { t: "Local Relationships, National Standards", d: "Boutique access. Institutional rigour." },
   ];
   return (
-    <section className="py-24 lg:py-36 border-t border-border bg-muted/40">
+    <section className="py-16 lg:py-24 border-t border-border bg-muted/40">
       <div className="mx-auto max-w-7xl px-6">
         <SectionHeader
           eyebrow="Why Diamond Realty"
@@ -657,7 +632,7 @@ function WhyUs() {
             </>
           }
         />
-        <div className="mt-16 grid md:grid-cols-2 lg:grid-cols-3 gap-px bg-border rounded-2xl overflow-hidden border border-border">
+        <div className="mt-12 grid md:grid-cols-2 lg:grid-cols-3 gap-px bg-border rounded-2xl overflow-hidden border border-border">
           {points.map((p, i) => (
             <Reveal key={p.t} delay={i * 60}>
               <div className="bg-background p-8 h-full hover:bg-secondary/60 transition-colors">
@@ -687,7 +662,7 @@ function Sectors() {
     { i: Hotel, l: "Hospitality" },
   ];
   return (
-    <section className="py-24 lg:py-36 border-t border-border">
+    <section className="py-16 lg:py-24 border-t border-border">
       <div className="mx-auto max-w-7xl px-6">
         <SectionHeader
           eyebrow="Sectors"
@@ -699,7 +674,7 @@ function Sectors() {
             </>
           }
         />
-        <div className="mt-14 grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-px bg-border rounded-2xl overflow-hidden border border-border">
+        <div className="mt-12 grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-px bg-border rounded-2xl overflow-hidden border border-border">
           {items.map((s, i) => (
             <Reveal key={s.l} delay={i * 40}>
               <div className="bg-background aspect-square flex flex-col items-center justify-center gap-3 p-6 hover:bg-secondary/60 transition-colors group">
@@ -719,7 +694,7 @@ function Sectors() {
 
 function CTA() {
   return (
-    <section id="contact" className="py-24 lg:py-36 border-t border-border bg-foreground text-background">
+    <section id="contact" className="py-16 lg:py-24 border-t border-border bg-foreground text-background">
       <div className="mx-auto max-w-7xl px-6 grid lg:grid-cols-12 gap-16">
         <div className="lg:col-span-7">
           <Reveal>
@@ -823,13 +798,13 @@ function CTA() {
 function Footer() {
   return (
     <footer className="border-t border-border bg-background">
-      <div className="mx-auto max-w-7xl px-6 py-16">
+      <div className="mx-auto max-w-7xl px-6 py-12">
         <div className="grid md:grid-cols-12 gap-10">
           <div className="md:col-span-5">
-            <div className="flex items-center gap-2.5">
-              <img src={logo} alt="Diamond Realty" className="h-9 w-9 object-contain" />
-              <span className="text-[15px] tracking-tight font-medium">
-                Diamond <span className="text-bronze">Realty</span>
+            <div className="flex items-center gap-3">
+              <img src={logo} alt="Diamond Realty" className="h-12 w-12 object-contain" />
+              <span className="font-serif text-[22px] tracking-tight leading-none">
+                Diamond <span className="text-bronze italic">Realty</span>
               </span>
             </div>
             <p className="mt-5 text-[14px] text-muted-foreground max-w-sm leading-relaxed">
