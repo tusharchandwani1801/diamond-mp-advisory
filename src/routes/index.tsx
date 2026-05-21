@@ -785,7 +785,8 @@ function InquiryForm() {
       setForm({ name: "", company: "", email: "", requirementType: "", city: "", message: "", website: "" });
     } catch (err) {
       console.error(err);
-      setErrorMsg("Something went wrong. Please try again or email us directly.");
+      const msg = err instanceof Error ? err.message : String(err);
+      setErrorMsg(msg || "Something went wrong. Please try again or email us directly.");
       setStatus("error");
     }
   };
