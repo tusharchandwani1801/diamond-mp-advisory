@@ -83,10 +83,8 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { name: "twitter:site", content: "@DiamondRealty" },
     ],
     links: [
-      {
-        rel: "stylesheet",
-        href: appCss,
-      },
+      { rel: "icon", type: "image/png", href: favicon },
+      { rel: "stylesheet", href: appCss },
     ],
   }),
   shellComponent: RootShell,
