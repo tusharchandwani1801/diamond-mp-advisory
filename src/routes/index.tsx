@@ -827,7 +827,9 @@ function Footer() {
           <div className="md:col-span-3">
             <div className="text-[11px] uppercase tracking-[0.18em] text-bronze">Connect</div>
             <a
-              href="#"
+              href="https://www.linkedin.com/in/tusshardchandwani/"
+              target="_blank"
+              rel="noopener noreferrer"
               className="mt-5 inline-flex items-center gap-2 text-[14px] hover:text-bronze transition-colors"
             >
               <Linkedin className="h-4 w-4" /> LinkedIn
