@@ -76,6 +76,7 @@ export const submitInquiry = createServerFn({ method: "POST" })
         from: "Diamond Realty <onboarding@resend.dev>",
         to: [TO_EMAIL],
         reply_to: data.email,
+        replyTo: data.email,
         subject: `New Inquiry — ${data.name}${data.company ? ` (${data.company})` : ""}`,
         html,
         text,
@@ -85,7 +86,12 @@ export const submitInquiry = createServerFn({ method: "POST" })
     if (!res.ok) {
       const body = await res.text();
       console.error("Resend send failed", res.status, body);
-      throw new Error(`Email send failed (${res.status})`);
+      let detail = body;
+      try {
+        const parsed = JSON.parse(body);
+        detail = parsed?.message || parsed?.error?.message || body;
+      } catch {}
+      throw new Error(`Email send failed (${res.status}): ${detail}`);
     }
 
     return { ok: true };
