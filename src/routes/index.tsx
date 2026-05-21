@@ -750,50 +750,163 @@ function CTA() {
         </div>
 
         <Reveal delay={200} className="lg:col-span-5">
-          <form
-            onSubmit={(e) => e.preventDefault()}
-            className="rounded-2xl border border-background/15 bg-background/[0.03] p-8 lg:p-10 backdrop-blur"
-          >
-            <div className="text-[11px] uppercase tracking-[0.18em] text-gold">Inquire</div>
-            <h3 className="mt-3 font-serif text-2xl">Schedule a consultation</h3>
-            <div className="mt-8 space-y-5">
-              {[
-                { l: "Name", t: "text", p: "Your full name" },
-                { l: "Company", t: "text", p: "Organisation" },
-                { l: "Email", t: "email", p: "you@company.com" },
-              ].map((f) => (
-                <div key={f.l}>
-                  <label className="text-[11px] uppercase tracking-[0.18em] text-background/50">
-                    {f.l}
-                  </label>
-                  <input
-                    type={f.t}
-                    placeholder={f.p}
-                    className="mt-2 w-full bg-transparent border-b border-background/20 focus:border-gold outline-none py-2 text-[15px] placeholder:text-background/30 transition-colors"
-                  />
-                </div>
-              ))}
-              <div>
-                <label className="text-[11px] uppercase tracking-[0.18em] text-background/50">
-                  Requirement
-                </label>
-                <textarea
-                  rows={3}
-                  placeholder="Briefly describe your mandate"
-                  className="mt-2 w-full bg-transparent border-b border-background/20 focus:border-gold outline-none py-2 text-[15px] placeholder:text-background/30 resize-none transition-colors"
-                />
-              </div>
-              <button
-                type="submit"
-                className="mt-4 w-full inline-flex items-center justify-center gap-2 bg-gold text-foreground px-6 py-3.5 rounded-full text-[14px] font-medium hover:bg-gold/90 transition-colors"
-              >
-                Request Consultation <ArrowUpRight className="h-4 w-4" />
-              </button>
-            </div>
-          </form>
+          <InquiryForm />
         </Reveal>
       </div>
     </section>
+  );
+}
+
+function InquiryForm() {
+  const send = useServerFn(submitInquiry);
+  const [form, setForm] = useState({
+    name: "",
+    company: "",
+    email: "",
+    requirementType: "",
+    city: "",
+    message: "",
+    website: "", // honeypot
+  });
+  const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
+  const [errorMsg, setErrorMsg] = useState("");
+
+  const update = (k: keyof typeof form) => (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) =>
+    setForm((f) => ({ ...f, [k]: e.target.value }));
+
+  const onSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (status === "loading") return;
+    setStatus("loading");
+    setErrorMsg("");
+    try {
+      await send({ data: form });
+      setStatus("success");
+      setForm({ name: "", company: "", email: "", requirementType: "", city: "", message: "", website: "" });
+    } catch (err) {
+      console.error(err);
+      setErrorMsg("Something went wrong. Please try again or email us directly.");
+      setStatus("error");
+    }
+  };
+
+  const inputCls =
+    "mt-2 w-full bg-transparent border-b border-background/20 focus:border-gold outline-none py-2 text-[15px] placeholder:text-background/30 transition-colors";
+  const labelCls = "text-[11px] uppercase tracking-[0.18em] text-background/50";
+
+  return (
+    <form
+      onSubmit={onSubmit}
+      className="rounded-2xl border border-background/15 bg-background/[0.03] p-8 lg:p-10 backdrop-blur"
+    >
+      <div className="text-[11px] uppercase tracking-[0.18em] text-gold">Inquire</div>
+      <h3 className="mt-3 font-serif text-2xl">Schedule a consultation</h3>
+
+      {status === "success" ? (
+        <div className="mt-8 space-y-4">
+          <div className="text-[11px] uppercase tracking-[0.18em] text-gold">Received</div>
+          <p className="font-serif text-2xl leading-snug">Thank you. Your inquiry has reached us.</p>
+          <p className="text-[14px] text-background/70 leading-relaxed">
+            We typically respond within one business day. For anything time-sensitive, write to
+            tusshar@diamondrealty.co directly.
+          </p>
+          <button
+            type="button"
+            onClick={() => setStatus("idle")}
+            className="mt-2 text-[12px] uppercase tracking-[0.18em] text-gold hover:text-gold/80 transition-colors"
+          >
+            Send another
+          </button>
+        </div>
+      ) : (
+        <div className="mt-8 space-y-5">
+          {/* honeypot */}
+          <input
+            type="text"
+            tabIndex={-1}
+            autoComplete="off"
+            value={form.website}
+            onChange={update("website")}
+            className="hidden"
+            aria-hidden="true"
+          />
+          <div>
+            <label className={labelCls}>Name</label>
+            <input required type="text" placeholder="Your full name" value={form.name} onChange={update("name")} className={inputCls} />
+          </div>
+          <div>
+            <label className={labelCls}>Company</label>
+            <input type="text" placeholder="Organisation" value={form.company} onChange={update("company")} className={inputCls} />
+          </div>
+          <div>
+            <label className={labelCls}>Email</label>
+            <input required type="email" placeholder="you@company.com" value={form.email} onChange={update("email")} className={inputCls} />
+          </div>
+          <div>
+            <label className={labelCls}>Requirement Type</label>
+            <select
+              value={form.requirementType}
+              onChange={update("requirementType")}
+              className={`${inputCls} appearance-none cursor-pointer`}
+            >
+              <option value="" className="bg-foreground text-background">Select a category</option>
+              {[
+                "Office / Workspace",
+                "Retail",
+                "Data Centre",
+                "Warehousing & Logistics",
+                "Industrial / Manufacturing",
+                "Land / Development",
+                "Institutional Advisory",
+                "Other",
+              ].map((o) => (
+                <option key={o} value={o} className="bg-foreground text-background">
+                  {o}
+                </option>
+              ))}
+            </select>
+          </div>
+          <div>
+            <label className={labelCls}>Preferred City</label>
+            <select
+              value={form.city}
+              onChange={update("city")}
+              className={`${inputCls} appearance-none cursor-pointer`}
+            >
+              <option value="" className="bg-foreground text-background">Select a city</option>
+              {["Indore", "Bhopal", "Gwalior", "Jabalpur", "Ujjain", "Across Madhya Pradesh"].map((o) => (
+                <option key={o} value={o} className="bg-foreground text-background">
+                  {o}
+                </option>
+              ))}
+            </select>
+          </div>
+          <div>
+            <label className={labelCls}>Message</label>
+            <textarea
+              required
+              rows={3}
+              placeholder="Briefly describe your mandate"
+              value={form.message}
+              onChange={update("message")}
+              className={`${inputCls} resize-none`}
+            />
+          </div>
+
+          {status === "error" && (
+            <p className="text-[12px] text-gold/90">{errorMsg}</p>
+          )}
+
+          <button
+            type="submit"
+            disabled={status === "loading"}
+            className="mt-4 w-full inline-flex items-center justify-center gap-2 bg-gold text-foreground px-6 py-3.5 rounded-full text-[14px] font-medium hover:bg-gold/90 transition-colors disabled:opacity-70"
+          >
+            {status === "loading" ? "Sending…" : (<>Request Consultation <ArrowUpRight className="h-4 w-4" /></>)}
+          </button>
+        </div>
+      )}
+    </form>
   );
 }
 
