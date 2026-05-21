@@ -1,5 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
+import { useServerFn } from "@tanstack/react-start";
+import { submitInquiry } from "@/lib/contact.functions";
 import {
   ArrowUpRight,
   Building2,
