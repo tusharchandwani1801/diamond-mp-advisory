@@ -1,8 +1,9 @@
 import { createServerFn } from "@tanstack/react-start";
 import { z } from "zod";
 
-const GATEWAY_URL = "https://connector-gateway.lovable.dev/resend";
+const RESEND_API_URL = "https://api.resend.com/emails";
 const TO_EMAIL = "tusshar@diamondrealty.co";
+const FROM_EMAIL = "Diamond Realty <onboarding@resend.dev>";
 
 const contactSchema = z.object({
   name: z.string().trim().min(1).max(120),
@@ -32,9 +33,7 @@ export const submitInquiry = createServerFn({ method: "POST" })
       return { ok: true };
     }
 
-    const LOVABLE_API_KEY = process.env.LOVABLE_API_KEY;
     const RESEND_API_KEY = process.env.RESEND_API_KEY;
-    if (!LOVABLE_API_KEY) throw new Error("LOVABLE_API_KEY is not configured");
     if (!RESEND_API_KEY) throw new Error("RESEND_API_KEY is not configured");
 
     const rows: [string, string][] = [
@@ -65,18 +64,16 @@ export const submitInquiry = createServerFn({ method: "POST" })
 
     const text = rows.map(([k, v]) => `${k}: ${v}`).join("\n");
 
-    const res = await fetch(`${GATEWAY_URL}/emails`, {
+    const res = await fetch(RESEND_API_URL, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-        Authorization: `Bearer ${LOVABLE_API_KEY}`,
-        "X-Connection-Api-Key": RESEND_API_KEY,
+        Authorization: `Bearer ${RESEND_API_KEY}`,
       },
       body: JSON.stringify({
-        from: "Diamond Realty <onboarding@resend.dev>",
+        from: FROM_EMAIL,
         to: [TO_EMAIL],
         reply_to: data.email,
-        replyTo: data.email,
         subject: `New Inquiry — ${data.name}${data.company ? ` (${data.company})` : ""}`,
         html,
         text,
