@@ -34,8 +34,15 @@ export const submitInquiry = createServerFn({ method: "POST" })
 
     const LOVABLE_API_KEY = process.env.LOVABLE_API_KEY;
     const RESEND_API_KEY = process.env.RESEND_API_KEY;
-    if (!LOVABLE_API_KEY) throw new Error("LOVABLE_API_KEY is not configured");
-    if (!RESEND_API_KEY) throw new Error("RESEND_API_KEY is not configured");
+    if (!LOVABLE_API_KEY || !RESEND_API_KEY) {
+      const present = Object.keys(process.env || {})
+        .filter((k) => /LOVABLE|RESEND|API/i.test(k))
+        .join(", ") || "none";
+      console.error("Missing email env vars. Present (filtered):", present);
+      throw new Error(
+        `Email is not configured (LOVABLE_API_KEY=${!!LOVABLE_API_KEY}, RESEND_API_KEY=${!!RESEND_API_KEY}). Present keys: ${present}`,
+      );
+    }
 
     const rows: [string, string][] = [
       ["Name", data.name],
